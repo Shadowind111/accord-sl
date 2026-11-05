@@ -1,0 +1,19 @@
+﻿cff-version: 1.2.0
+message: "If you use this package, please cite the accompanying manuscript."
+title: "T2-ACCORD-SL: two-tier routine-laboratory triage for gastrointestinal stromal tumours"
+authors:
+  - family-names: "Li"
+    given-names: "Yajie"
+  - family-names: "Li"
+    given-names: "Yanting"
+  - family-names: "Yang"
+    given-names: "Binze"
+  - family-names: "Lian"
+    given-names: "Lei"
+  - family-names: "Li"
+    given-names: "Mingzhe"
+  - family-names: "Zhang"
+    given-names: "Changhua"
+version: "11"
+date-released: "2026-11-05"
+license: MIT
