@@ -7,7 +7,7 @@
 - **Model type:** locked ensemble of five heterogeneous tabular experts with weighted fusion, Platt-style calibration and a prespecified operating threshold
 - **Developed by:** The Seventh Affiliated Hospital, Sun Yat-sen University, Shenzhen, China
 - **Intended setting:** secondary/tertiary hospital inpatient care, before specialist confirmation of a gastrointestinal stromal tumour (GIST)
-- **Release status:** research prototype with portable T2 scoring package; not a medical device; not for clinical decision-making
+- **Release status:** research prototype with portable T1 and T2 scoring packages; not a medical device; not for clinical decision-making
 
 ## 2. Intended use
 
@@ -129,12 +129,13 @@ Because the development and external cohorts were matched/enriched, observed PPV
 
 ## 10. Files and contact
 
-- `models/`: portable locked layers, five expert artifacts and input contracts.
+- `models/`: portable T1/T2 locked layers, five expert artifacts per tier and input contracts.
+- `predict_t1.py`: T1 scoring entry point (`--mode fast` or `--mode full`).
 - `predict_t2.py`: T2 scoring entry point (`--mode fast` or `--mode full`).
-- `app.py`: local Gradio batch demonstration.
-- `../release_cli/`: tested minimal Docker CLI image (`accord-sl-t2-cli`).
+- `app_both.py`: combined T1/T2 local Gradio demonstration.
+- `../release_cli/`: tested minimal Docker CLI image (`accord-sl-t2-cli`, T2 fast).
 - `Dockerfile`: Gradio image template (not built in this environment).
-- `synthetic_example.csv`: synthetic input example (no patient data).
+- `synthetic_example.csv` and `synthetic_t1_example.csv`: synthetic input examples (no patient data).
 - `MANIFEST.json`: SHA-256 hashes of the locked artifacts.
 
 Contact: corresponding authors of the accompanying manuscript.
