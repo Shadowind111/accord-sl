@@ -1,18 +1,20 @@
-# T2-ACCORD-SL research package
+# T1/T2 ACCORD-SL research package
 
 **Status:** research prototype. Not a medical device. Not for diagnosis, referral, treatment, or discharge decisions.
 
-This package contains the T2-ACCORD-SL model card, portable locked artifacts, a Python scoring entry point, a synthetic example, a Gradio demonstration and a Docker template. The local **fast mode** (EBM + random forest) and **full mode** (five locked experts: EBM, TabPFN, TabDPT, AutoGluon, random forest) have both been smoke-tested on synthetic data. A Docker CLI image (`../release_cli/`) has been built and tested. A Gradio Docker image was not built because the registry/network blocked the full Gradio dependency install; the local Gradio app was tested at `http://127.0.0.1:7860`.
+This package contains the T1-ACCORD-SL and T2-ACCORD-SL model cards, portable locked artifacts, Python scoring entry points, synthetic examples, a combined Gradio demonstration and a Docker template. T1 is a low-burden pre-screen; T2 is specialist-priority scoring with the five-expert ensemble (EBM, TabPFN, TabDPT, AutoGluon, random forest). Both tiers have been smoke-tested on synthetic data. A Docker CLI image for T2 (`../release_cli/`) has been built and tested. The combined Gradio app was tested locally.
 
 ## Contents
 
 | File | Purpose |
 |---|---|
 | `MODEL_CARD.md` | Intended use, inputs, outputs, performance, limitations |
-| `models/` | Portable T2 locked layers, five expert artifacts and input contracts |
+| `models/` | Portable T1/T2 locked layers, five expert artifacts per tier and input contracts |
+| `predict_t1.py` | T1 scoring entry point (`--mode fast` or `--mode full`) |
 | `predict_t2.py` | T2 scoring entry point (`--mode fast` or `--mode full`) |
-| `app.py` | Gradio batch demonstration |
-| `synthetic_example.csv` | Three synthetic patients (no real data) |
+| `app_both.py` | Combined T1/T2 Gradio demonstration |
+| `synthetic_t1_example.csv` | Three synthetic T1 patients (no real data) |
+| `synthetic_example.csv` | Three synthetic T2 patients (no real data) |
 | `synthetic_scored.csv` | Example output from the fast mode |
 | `requirements.txt` | Minimal dependencies for the fast demo |
 | `requirements-full.txt` | Additional dependencies for the five-expert mode |
@@ -29,17 +31,18 @@ $env:T2_LAYERS = "$env:T2_ROOT\accord_sl\t2_original_accord_sl\t2_original_accor
 $env:T2_EXPERTS = "$env:T2_ROOT\models\t2_expert_pool\expert_model_artifacts"
 ```
 
-Run the synthetic example:
+Run the synthetic examples:
 
 ```powershell
 python predict_t2.py --input synthetic_example.csv --out synthetic_scored.csv --mode fast
+python predict_t1.py --input synthetic_t1_example.csv --out synthetic_t1_scored.csv --mode fast
 ```
 
-Run the web demo:
+Run the combined web demo:
 
 ```powershell
-python app.py
-# open http://127.0.0.1:7860
+python app_both.py
+# open http://127.0.0.1:7862
 ```
 
 ## Input CSV
